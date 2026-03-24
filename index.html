@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seoul Hanmaum Rotary Club - Community Projects</title>
+    <title>Heart of Seoul - Seoul Hanmaum Rotary Club</title>
     
-    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -43,81 +41,130 @@
             min-height: 100vh;
         }
 
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        /* Top Utility Bar (Language & Auth) */
+        .top-bar {
+            background: #0b1c47;
+            padding: 0.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             color: white;
-            padding: 2rem 1rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            font-size: 0.85rem;
         }
 
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 20px 20px;
-            opacity: 0.3;
-            animation: drift 20s linear infinite;
+        .lang-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 0.3rem 0.75rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.2s ease;
         }
 
-        @keyframes drift {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
+        .lang-toggle:hover {
+            background: var(--accent);
+            border-color: var(--accent);
         }
 
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            position: relative;
-            z-index: 1;
+        .auth-status {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
-        .tagline {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            position: relative;
-            z-index: 1;
+        .auth-status span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
         }
 
-        /* Navigation */
-        .nav {
+        .logout-btn {
+            background: transparent;
+            border: none;
+            color: #93c5fd;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Branding Header */
+        .header {
             background: white;
-            padding: 1rem;
+            padding: 1rem 2rem;
             box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             position: sticky;
             top: 0;
             z-index: 100;
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
             flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logos-container {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .logo-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo-main {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.1;
+        }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            color: var(--gray);
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .logo-img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 0.75rem;
         }
 
         .nav-btn {
-            padding: 0.75rem 1.5rem;
+            padding: 0.75rem 1.25rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.3s ease;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .nav-btn.primary {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: white;
         }
 
         .nav-btn.secondary {
-            background: transparent;
+            background: white;
             color: var(--primary);
             border: 2px solid var(--primary);
         }
@@ -127,34 +174,68 @@
             box-shadow: var(--shadow-lg);
         }
 
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: var(--light);
+        /* Hero / Campaign Section */
+        .hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1517147196574-a90306208bc3?auto=format&fit=crop&q=80') center/cover;
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero-desc {
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        .campaign-banner {
+            background: var(--accent);
+            color: var(--dark);
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
             border-radius: 50px;
+            font-weight: 700;
             font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
         }
 
         /* Main Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem 1rem;
+            padding: 3rem 1rem;
         }
 
         /* Stats Bar */
         .stats-bar {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
 
         .stat-card {
             background: white;
-            padding: 1.5rem;
+            padding: 2rem;
             border-radius: 16px;
             text-align: center;
             box-shadow: var(--shadow);
@@ -176,17 +257,33 @@
             color: var(--gray);
             font-size: 0.9rem;
             margin-top: 0.25rem;
+            font-weight: 500;
         }
 
         /* Project Grid */
+        .filter-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
         .section-title {
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
-            margin-bottom: 1.5rem;
             color: var(--dark);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        }
+
+        .sort-select {
+            padding: 0.6rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 500;
         }
 
         .projects-grid {
@@ -202,6 +299,9 @@
             box-shadow: var(--shadow);
             transition: all 0.3s ease;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .project-card:hover {
@@ -212,17 +312,43 @@
         .project-image {
             width: 100%;
             height: 200px;
-            object-fit: cover;
             background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--primary);
             font-size: 3rem;
+            position: relative;
+        }
+
+        .edit-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: 1px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.2s;
+        }
+
+        .edit-badge:hover {
+            background: var(--primary);
+            color: white;
         }
 
         .project-content {
             padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .project-title {
@@ -234,21 +360,31 @@
 
         .project-author {
             color: var(--gray);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
 
         .project-description {
             color: var(--gray);
             line-height: 1.6;
             margin-bottom: 1rem;
+            font-size: 0.95rem;
             display: -webkit-box;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 4;
             -webkit-box-orient: vertical;
             overflow: hidden;
+        }
+
+        .views-badge {
+            font-size: 0.8rem;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-bottom: 1rem;
         }
 
         .project-meta {
@@ -257,20 +393,22 @@
             align-items: center;
             padding-top: 1rem;
             border-top: 1px solid #e2e8f0;
+            margin-top: auto;
         }
 
         .vote-btn {
             background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
             color: white;
             border: none;
-            padding: 0.75rem 1.5rem;
+            padding: 0.75rem 1.25rem;
             border-radius: 50px;
             cursor: pointer;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
             transition: all 0.3s ease;
+            font-size: 0.9rem;
         }
 
         .vote-btn:hover:not(:disabled) {
@@ -279,13 +417,15 @@
         }
 
         .vote-btn:disabled {
-            background: var(--gray);
+            background: #cbd5e1;
             cursor: not-allowed;
-            opacity: 0.7;
+            opacity: 0.8;
+            color: var(--gray);
         }
 
         .vote-btn.voted {
             background: var(--success);
+            color: white;
         }
 
         .vote-count {
@@ -294,7 +434,7 @@
             color: var(--dark);
         }
 
-        /* Modal */
+        /* Modal Overlays */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -327,7 +467,7 @@
             max-width: 600px;
             max-height: 90vh;
             overflow-y: auto;
-            padding: 2rem;
+            padding: 2.5rem;
             position: relative;
             animation: slideUp 0.3s ease;
         }
@@ -362,11 +502,12 @@
 
         .modal-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-bottom: 1.5rem;
             color: var(--dark);
         }
 
+        /* Forms */
         .form-group {
             margin-bottom: 1.5rem;
         }
@@ -374,13 +515,14 @@
         .form-label {
             display: block;
             margin-bottom: 0.5rem;
-            font-weight: 500;
+            font-weight: 600;
             color: var(--dark);
+            font-size: 0.9rem;
         }
 
         .form-input, .form-textarea {
             width: 100%;
-            padding: 0.75rem 1rem;
+            padding: 0.85rem 1rem;
             border: 2px solid #e2e8f0;
             border-radius: 12px;
             font-family: inherit;
@@ -394,12 +536,12 @@
         }
 
         .form-textarea {
-            min-height: 120px;
+            min-height: 140px;
             resize: vertical;
         }
 
         .form-hint {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--gray);
             margin-top: 0.25rem;
         }
@@ -411,7 +553,7 @@
             color: white;
             border: none;
             border-radius: 12px;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -427,102 +569,32 @@
             cursor: not-allowed;
         }
 
-        /* Auth Modal Specific */
-        .auth-options {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .auth-btn {
-            padding: 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            background: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .auth-btn:hover {
-            border-color: var(--primary);
-            background: var(--light);
-        }
-
-        .auth-btn.google {
-            border-color: #ea4335;
-            color: #ea4335;
-        }
-
-        .divider {
+        /* Marketing & Intro Popup specific */
+        .welcome-modal {
+            max-width: 700px;
             text-align: center;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 16px;
             margin: 1.5rem 0;
-            position: relative;
-            color: var(--gray);
+            background: #000;
+            box-shadow: var(--shadow-lg);
         }
 
-        .divider::before {
-            content: '';
+        .video-container iframe {
             position: absolute;
-            top: 50%;
+            top: 0;
             left: 0;
-            right: 0;
-            height: 1px;
-            background: #e2e8f0;
+            width: 100%;
+            height: 100%;
         }
 
-        .divider span {
-            background: white;
-            padding: 0 1rem;
-            position: relative;
-        }
-
-        /* Loading & Empty States */
-        .loading {
-            text-align: center;
-            padding: 3rem;
-            color: var(--gray);
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid #e2e8f0;
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: white;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-        }
-
-        .empty-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .empty-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Toast Notifications */
+        /* Toasts */
         .toast-container {
             position: fixed;
             bottom: 2rem;
@@ -543,6 +615,7 @@
             gap: 0.75rem;
             animation: slideIn 0.3s ease;
             min-width: 300px;
+            font-weight: 500;
         }
 
         @keyframes slideIn {
@@ -550,216 +623,171 @@
             to { transform: translateX(0); opacity: 1; }
         }
 
-        .toast.success {
-            border-left: 4px solid var(--success);
-        }
+        .toast.success { border-left: 4px solid var(--success); }
+        .toast.error { border-left: 4px solid #ef4444; }
 
-        .toast.error {
-            border-left: 4px solid #ef4444;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .logo { font-size: 1.75rem; }
+            .hero-title { font-size: 2rem; }
+            .header { padding: 1rem; }
+            .nav-actions { width: 100%; justify-content: space-between; }
             .projects-grid { grid-template-columns: 1fr; }
-            .modal { padding: 1.5rem; }
-        }
-
-        /* Sort/Filter Bar */
-        .filter-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .sort-select {
-            padding: 0.5rem 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            background: white;
-            cursor: pointer;
-            font-family: inherit;
-        }
-
-        /* Video Embed */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 12px;
-            margin: 1rem 0;
-            background: #000;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
+    <div class="top-bar">
+        <button class="lang-toggle" onclick="toggleLanguage()">
+            <span id="lang-icon">🇰🇷</span> <span id="lang-label">한국어</span>
+        </button>
+        <div class="auth-status">
+            <span id="user-display">
+                <span>👤</span> <span data-i18n="guest">Guest View</span>
+            </span>
+            <button id="quick-logout" class="logout-btn" style="display:none;" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
     <header class="header">
-        <h1 class="logo">Seoul Hanmaum Rotary Club</h1>
-        <p class="tagline">Community Project Crowdfunding & Voting Platform</p>
+        <div class="logos-container">
+            <div class="logo-item">
+                <span class="logo-main">Heart of Seoul</span>
+                <span class="logo-sub" data-i18n="campaignSub">Community Campaign</span>
+            </div>
+            
+            <div class="logo-item" style="border-left: 1px solid #e2e8f0; padding-left: 1.5rem;">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8f/Rotary_International_logo.svg/1200px-Rotary_International_logo.svg.png" alt="Seoul Hanmaum Rotary Logo" class="logo-img">
+                <span style="font-size: 0.65rem; color: var(--gray); font-weight: 600;">Seoul Hanmaum</span>
+            </div>
+        </div>
+
+        <div class="nav-actions">
+            <button class="nav-btn secondary" onclick="showAuthModal()" id="nav-login-btn">
+                <span>🔑</span> <span data-i18n="login">Login with Google</span>
+            </button>
+            <button class="nav-btn primary" onclick="openSubmitModal()">
+                <span>➕</span> <span data-i18n="submitBtn">Submit Project</span>
+            </button>
+        </div>
     </header>
 
-    <!-- Navigation -->
-    <nav class="nav">
-        <button class="nav-btn primary" onclick="openSubmitModal()">
-            <span>➕</span> Submit Project Idea
-        </button>
-        <button class="nav-btn secondary" onclick="showAuthModal()">
-            <span>🔐</span> <span id="auth-btn-text">Login to Vote</span>
-        </button>
-        <div id="user-info" class="user-info" style="display: none;">
-            <span>👤</span>
-            <span id="user-name"></span>
-            <button onclick="logout()" style="margin-left: 0.5rem; background: none; border: none; cursor: pointer; color: var(--primary);">Logout</button>
-        </div>
-    </nav>
+    <section class="hero">
+        <span class="campaign-banner" data-i18n="campaignActive">Campaign Active: Mar - May 2026</span>
+        <h1 class="hero-title" data-i18n="heroTitle">What does Seoul need?</h1>
+        <p class="hero-desc" data-i18n="heroDesc">
+            Seoul Hanmaum Rotary Club is launching the "Heart of Seoul" listening campaign. For the next 2-3 months, we are open-sourcing our focus. We want you to pitch your ideas on community service projects you are passionate about. Share your stories, share your video pitches, and vote on what projects matter most to our city. Let’s build something together!
+        </p>
+    </section>
 
-    <!-- Main Content -->
     <main class="container">
         
-        <!-- Stats -->
         <div class="stats-bar">
             <div class="stat-card">
                 <div class="stat-number" id="total-projects">0</div>
-                <div class="stat-label">Project Ideas</div>
+                <div class="stat-label" data-i18n="statProjects">Community Pitches</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="total-votes">0</div>
-                <div class="stat-label">Total Votes</div>
+                <div class="stat-label" data-i18n="statVotes">Total Votes Recorded</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="active-users">0</div>
-                <div class="stat-label">Community Members</div>
+                <div class="stat-label" data-i18n="statMembers">Engaged Members</div>
             </div>
         </div>
 
-        <!-- Filter Bar -->
         <div class="filter-bar">
-            <h2 class="section-title">📋 Community Projects</h2>
+            <h2 class="section-title" data-i18n="showcaseTitle">📋 Community Showcase</h2>
             <select class="sort-select" id="sort-select" onchange="loadProjects()">
-                <option value="newest">Newest First</option>
-                <option value="popular">Most Popular</option>
-                <option value="alphabetical">Alphabetical</option>
+                <option value="popular" data-i18n="sortPopular">Most Voted</option>
+                <option value="newest" data-i18n="sortNew">Newest Ideas</option>
             </select>
         </div>
 
-        <!-- Projects Grid -->
         <div id="projects-container" class="projects-grid">
             <div class="loading">
-                <div class="spinner"></div>
-                <p>Loading community projects...</p>
+                <p>Curating projects...</p>
             </div>
         </div>
     </main>
 
-    <!-- Submit Project Modal -->
     <div id="submit-modal" class="modal-overlay">
         <div class="modal">
             <button class="modal-close" onclick="closeModal('submit-modal')">&times;</button>
-            <h2 class="modal-title">Submit Your Project Idea</h2>
+            <h2 class="modal-title" id="form-modal-title" data-i18n="formTitle">Pitch Your Idea</h2>
             
             <form id="project-form" onsubmit="handleProjectSubmit(event)">
+                <input type="hidden" id="edit-project-id" value="">
+
                 <div class="form-group">
-                    <label class="form-label">Project Title *</label>
-                    <input type="text" class="form-input" id="project-title" required 
-                           placeholder="e.g., Youth Leadership Workshop 2024">
+                    <label class="form-label" data-i18n="fTitle">Project Title *</label>
+                    <input type="text" class="form-input" id="project-title" required placeholder="Ex: Children's Art Workshop">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Your Name *</label>
-                    <input type="text" class="form-input" id="project-author" required 
-                           placeholder="Your full name">
+                    <label class="form-label" data-i18n="fAuthor">Your Name / Team Name *</label>
+                    <input type="text" class="form-input" id="project-author" required placeholder="John Doe">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Project Description *</label>
-                    <textarea class="form-textarea" id="project-description" required 
-                              placeholder="Describe your project idea, goals, target community, and expected impact..."></textarea>
+                    <label class="form-label" data-i18n="fDesc">Describe your story & pitch *</label>
+                    <textarea class="form-textarea" id="project-description" required placeholder="Tell us the problem and how this project solves it."></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">YouTube Video URL (Optional)</label>
-                    <input type="url" class="form-input" id="project-video" 
-                           placeholder="https://www.youtube.com/watch?v=...">
-                    <p class="form-hint">Add a video pitch to make your project more compelling</p>
+                    <label class="form-label" data-i18n="fVid">YouTube Video URL (Pitch Link)</label>
+                    <input type="url" class="form-input" id="project-video" placeholder="https://www.youtube.com/watch?v=...">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Image URL (Optional)</label>
-                    <input type="url" class="form-input" id="project-image" 
-                           placeholder="https://example.com/image.jpg">
-                    <p class="form-hint">Link to an image representing your project</p>
+                    <label class="form-label" data-i18n="fImage">Thumbnail Image URL (Optional)</label>
+                    <input type="url" class="form-input" id="project-image" placeholder="https://unsplash.com/your-image.jpg">
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label">Category</label>
-                    <select class="form-input" id="project-category">
-                        <option value="community">Community Service</option>
-                        <option value="youth">Youth Development</option>
-                        <option value="environment">Environment</option>
-                        <option value="health">Health & Wellness</option>
-                        <option value="education">Education</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="submit-btn" id="submit-project-btn">
-                    Submit Project Idea
+                <button type="submit" class="submit-btn" id="submit-project-btn" data-i18n="fSubmit">
+                    Publish My Project
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- Auth Modal -->
-    <div id="auth-modal" class="modal-overlay">
-        <div class="modal">
-            <button class="modal-close" onclick="closeModal('auth-modal')">&times;</button>
-            <h2 class="modal-title">Login to Participate</h2>
-            <p style="color: var(--gray); margin-bottom: 1.5rem;">
-                Please login to submit projects and vote. One vote per person ensures fair selection.
-            </p>
-
-            <div class="auth-options">
-                <button class="auth-btn google" onclick="signInWithGoogle()">
-                    <span>🔴</span> Continue with Google
-                </button>
-                
-                <div class="divider"><span>or</span></div>
-                
-                <button class="auth-btn" onclick="signInAnonymously()">
-                    <span>👤</span> Continue as Guest
-                </button>
+    <div id="welcome-modal" class="modal-overlay">
+        <div class="modal welcome-modal">
+            <button class="modal-close" onclick="closeModal('welcome-modal')">&times;</button>
+            <h2 class="modal-title" data-i18n="popTitle">Welcome to the Campaign!</h2>
+            <p style="color: var(--gray);" data-i18n="popDesc">Watch this short video to understand what the "Heart of Seoul" is all about and how you can participate!</p>
+            
+            <div class="video-container">
+                <iframe id="intro-video-iframe" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
             </div>
 
-            <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--gray);">
-                🔒 Secure authentication powered by Firebase
-            </p>
+            <button class="submit-btn" onclick="closeModal('welcome-modal')" data-i18n="popClose">
+                Get Started & Browse
+            </button>
         </div>
     </div>
 
-    <!-- Toast Container -->
+    <div id="auth-modal" class="modal-overlay">
+        <div class="modal" style="max-width: 450px; text-align: center;">
+            <button class="modal-close" onclick="closeModal('auth-modal')">&times;</button>
+            <h2 class="modal-title" data-i18n="loginTitle">Secure Google Login</h2>
+            <p style="color: var(--gray); margin-bottom: 2rem;" data-i18n="loginDesc">
+                To prevent fraud and ensure a fair "1 vote per person" system, you must log in with Google to vote or submit projects.
+            </p>
+
+            <button class="submit-btn" onclick="signInWithGoogle()" style="display:flex; align-items:center; justify-content:center; gap: 0.5rem;">
+                🔴 <span data-i18n="loginBtn">Continue with Google</span>
+            </button>
+        </div>
+    </div>
+
     <div id="toast-container" class="toast-container"></div>
 
     <script>
         // ==========================================
-        // FIREBASE CONFIGURATION
+        // 1. PROJECT CONFIGURATIONS (Firebase Setup)
         // ==========================================
         
-        // REPLACE THIS WITH YOUR OWN FIREBASE CONFIG
-        // Get this from Firebase Console > Project Settings > General > Your apps > Web app
         const firebaseConfig = {
             apiKey: "AIzaSyAXLBJHvUKX5oidY8Un2fX-4vbvtrOykKA",
             authDomain: "heart-of-seoul.firebaseapp.com",
@@ -769,21 +797,102 @@
             appId: "1:713901622749:web:2a41ebd4d9cc78ec27e234"
         };
 
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // ==========================================
-        // GLOBAL STATE
-        // ==========================================
-        
+        // Global trackers
         let currentUser = null;
         let projects = [];
         let userVotes = new Set();
+        let viewedProjects = new Set(); 
 
         // ==========================================
-        // AUTHENTICATION FUNCTIONS
+        // 2. BILINGUAL DICTIONARY HANDLER
+        // ==========================================
+        
+        let currentLang = 'en';
+        const translations = {
+            en: {
+                campaignSub: "Community Campaign",
+                campaignActive: "Campaign Active: Mar - May 2026",
+                heroTitle: "What does Seoul need?",
+                heroDesc: "Seoul Hanmaum Rotary Club is launching the 'Heart of Seoul' listening campaign. For the next 2-3 months, we are open-sourcing our focus. We want you to pitch your ideas on community service projects you are passionate about. Share your stories, share your video pitches, and vote on what projects matter most to our city.",
+                login: "Login with Google",
+                submitBtn: "Submit Project",
+                statProjects: "Community Pitches",
+                statVotes: "Total Votes Recorded",
+                statMembers: "Engaged Members",
+                showcaseTitle: "📋 Community Showcase",
+                sortPopular: "Most Voted",
+                sortNew: "Newest Ideas",
+                guest: "Guest View",
+                formTitle: "Pitch Your Idea",
+                fTitle: "Project Title *",
+                fAuthor: "Your Name / Team Name *",
+                fDesc: "Describe your story & pitch *",
+                fVid: "YouTube Video URL (Pitch Link)",
+                fImage: "Thumbnail Image URL (Optional)",
+                fSubmit: "Publish My Project",
+                popTitle: "Welcome to the Campaign!",
+                popDesc: "Watch this short video to understand what the 'Heart of Seoul' is all about and how you can participate!",
+                popClose: "Get Started & Browse",
+                loginTitle: "Secure Google Login",
+                loginDesc: "To prevent fraud and ensure a fair '1 vote per person' system, you must log in with Google to vote or submit projects.",
+                loginBtn: "Continue with Google"
+            },
+            ko: {
+                campaignSub: "커뮤니티 캠페인",
+                campaignActive: "캠페인 기간: 2026년 3월 - 5월",
+                heroTitle: "서울에 무엇이 필요할까요?",
+                heroDesc: "서울 한마음 로타리클럽에서 'Heart of Seoul' 듣기 캠페인을 시작합니다. 향후 2-3개월 동안 우리의 비전을 오픈소스로 공유합니다. 여러분이 열정을 가진 커뮤니티 봉사 프로젝트 아이디어를 제안해 주세요. 이야기와 동영상 피치를 공유하고, 우리 도시에 가장 중요한 프로젝트에 투표해 주세요.",
+                login: "Google 로그인",
+                submitBtn: "프로젝트 제출",
+                statProjects: "제안된 아이디어",
+                statVotes: "기록된 총 투표수",
+                statMembers: "참여 중인 회원",
+                showcaseTitle: "📋 커뮤니티 쇼케이스",
+                sortPopular: "인기순",
+                sortNew: "최신순",
+                guest: "게스트 보기",
+                formTitle: "아이디어 제안하기",
+                fTitle: "프로젝트 제목 *",
+                fAuthor: "작성자 / 팀명 *",
+                fDesc: "스토리 및 피치 설명 *",
+                fVid: "YouTube 동영상 URL (피치 링크)",
+                fImage: "썸네일 이미지 URL (선택사항)",
+                fSubmit: "내 프로젝트 게시하기",
+                popTitle: "캠페인에 오신 것을 환영합니다!",
+                popDesc: "'Heart of Seoul' 캠페인이 무엇인지, 어떻게 참여하는지 짧은 동영상을 통해 확인해 보세요!",
+                popClose: "시작하기 & 둘러보기",
+                loginTitle: "안전한 구글 로그인",
+                loginDesc: "부정 투표를 방지하고 '1인 1표' 공정성을 보장하기 위해 투표 및 제출은 구글 로그인이 필요합니다.",
+                loginBtn: "구글로 계속하기"
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ko' : 'en';
+            
+            // Toggle Top UI UI
+            document.getElementById('lang-icon').textContent = currentLang === 'en' ? '🇰🇷' : '🇺🇸';
+            document.getElementById('lang-label').textContent = currentLang === 'en' ? '한국어' : 'English';
+
+            // Swap standard DOM texts
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    element.textContent = translations[currentLang][key];
+                }
+            });
+
+            // Re-render project cards to update buttons inside them
+            renderProjects();
+        }
+
+
+        // ==========================================
+        // 3. SECURE AUTH TRACKER (Zero Guest Permissions for Write Actions)
         // ==========================================
         
         function showAuthModal() {
@@ -795,78 +904,55 @@
         }
 
         function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('active');
+
+            // If video modal closes, stop the video from playing
+            if(modalId === 'welcome-modal') {
+                document.getElementById('intro-video-iframe').src = document.getElementById('intro-video-iframe').src;
+            }
         }
 
-function signInWithGoogle() {
-    // Prevent multiple clicks
-    if (window.signingIn) return;
-    window.signingIn = true;
-    
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider)
-        .then(() => {
-            closeModal('auth-modal');
-            showToast('Successfully logged in!', 'success');
-        })
-        .catch(error => {
-            showToast('Login failed: ' + error.message, 'error');
-        })
-        .finally(() => {
-            window.signingIn = false;  // Reset flag
-        });
-}
-
-        function signInAnonymously() {
-            auth.signInAnonymously()
+        function signInWithGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider)
                 .then(() => {
                     closeModal('auth-modal');
-                    showToast('Logged in as guest', 'success');
+                    showToast('Successfully logged in!', 'success');
                 })
-                .catch(error => {
-                    showToast('Login failed: ' + error.message, 'error');
-                });
+                .catch(error => showToast('Login failed: ' + error.message, 'error'));
         }
 
         function logout() {
             auth.signOut()
-                .then(() => {
-                    showToast('Logged out successfully', 'success');
-                })
-                .catch(error => {
-                    showToast('Logout failed: ' + error.message, 'error');
-                });
+                .then(() => showToast('Logged out successfully', 'success'))
+                .catch(error => showToast('Logout failed: ' + error.message, 'error'));
         }
 
-        // Auth state listener
         auth.onAuthStateChanged(user => {
             currentUser = user;
-            updateUI();
+            
+            const userDisplay = document.getElementById('user-display');
+            const quickLogout = document.getElementById('quick-logout');
+            const navLoginBtn = document.getElementById('nav-login-btn');
+
             if (user) {
+                userDisplay.innerHTML = `<span>👤</span> ${user.displayName || 'User'}`;
+                quickLogout.style.display = 'inline';
+                navLoginBtn.innerHTML = `<span>🔓</span> Logout`;
                 loadUserVotes();
             } else {
+                userDisplay.innerHTML = `<span>👤</span> Guest View`;
+                quickLogout.style.display = 'none';
+                navLoginBtn.innerHTML = `<span>🔑</span> Login with Google`;
                 userVotes.clear();
-                renderProjects();
             }
+            renderProjects();
         });
 
-        function updateUI() {
-            const authBtnText = document.getElementById('auth-btn-text');
-            const userInfo = document.getElementById('user-info');
-            const userName = document.getElementById('user-name');
-
-            if (currentUser) {
-                authBtnText.textContent = 'Logout';
-                userInfo.style.display = 'flex';
-                userName.textContent = currentUser.displayName || currentUser.email || 'Guest User';
-            } else {
-                authBtnText.textContent = 'Login to Vote';
-                userInfo.style.display = 'none';
-            }
-        }
 
         // ==========================================
-        // PROJECT FUNCTIONS
+        // 4. FUNCTIONAL ENGINES (Vote, Edit, View Tracking)
         // ==========================================
         
         function openSubmitModal() {
@@ -874,15 +960,34 @@ function signInWithGoogle() {
                 showAuthModal();
                 return;
             }
+            // Reset to clean creation state
+            document.getElementById('edit-project-id').value = "";
+            document.getElementById('project-form').reset();
+            document.getElementById('form-modal-title').textContent = currentLang === 'en' ? "Pitch Your Idea" : "아이디어 제안하기";
+            document.getElementById('submit-modal').classList.add('active');
+        }
+
+        function openEditModal(projectId) {
+            const project = projects.find(p => p.id === projectId);
+            if (!project) return;
+
+            document.getElementById('edit-project-id').value = projectId;
+            document.getElementById('project-title').value = project.title || "";
+            document.getElementById('project-author').value = project.author || "";
+            document.getElementById('project-description').value = project.description || "";
+            document.getElementById('project-video').value = project.videoUrl || "";
+            document.getElementById('project-image').value = project.imageUrl || "";
+
+            document.getElementById('form-modal-title').textContent = currentLang === 'en' ? "Edit Your Pitch" : "프로젝트 수정하기";
             document.getElementById('submit-modal').classList.add('active');
         }
 
         async function handleProjectSubmit(e) {
             e.preventDefault();
-            
             const btn = document.getElementById('submit-project-btn');
             btn.disabled = true;
-            btn.textContent = 'Submitting...';
+
+            const editId = document.getElementById('edit-project-id').value;
 
             try {
                 const projectData = {
@@ -891,136 +996,104 @@ function signInWithGoogle() {
                     description: document.getElementById('project-description').value,
                     videoUrl: document.getElementById('project-video').value,
                     imageUrl: document.getElementById('project-image').value,
-                    category: document.getElementById('project-category').value,
                     submittedBy: currentUser.uid,
-                    submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
-                    votes: 0,
-                    voters: []
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
                 };
 
-                await db.collection('projects').add(projectData);
+                if (editId) {
+                    // Updating an existing project
+                    await db.collection('projects').doc(editId).update(projectData);
+                    showToast('Project updated successfully!', 'success');
+                } else {
+                    // Creating fresh new project
+                    projectData.submittedAt = firebase.firestore.FieldValue.serverTimestamp();
+                    projectData.votes = 0;
+                    projectData.views = 0; // Initialize views
+                    projectData.voters = [];
+                    await db.collection('projects').add(projectData);
+                    showToast('Project Published successfully!', 'success');
+                }
                 
                 closeModal('submit-modal');
                 document.getElementById('project-form').reset();
-                showToast('Project submitted successfully!', 'success');
                 loadProjects();
-                
             } catch (error) {
-                showToast('Error submitting project: ' + error.message, 'error');
+                showToast('Error: ' + error.message, 'error');
             } finally {
                 btn.disabled = false;
-                btn.textContent = 'Submit Project Idea';
             }
         }
 
         async function loadProjects() {
-            const container = document.getElementById('projects-container');
-            container.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading projects...</p></div>';
-
             try {
                 const sortValue = document.getElementById('sort-select').value;
                 let query = db.collection('projects');
 
-                if (sortValue === 'newest') {
-                    query = query.orderBy('submittedAt', 'desc');
-                } else if (sortValue === 'popular') {
-                    query = query.orderBy('votes', 'desc');
-                }
+                if (sortValue === 'newest') query = query.orderBy('submittedAt', 'desc');
+                else query = query.orderBy('votes', 'desc');
 
                 const snapshot = await query.get();
-                
-                projects = [];
-                let totalVotes = 0;
+                projects = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-                snapshot.forEach(doc => {
-                    const data = doc.data();
-                    projects.push({ id: doc.id, ...data });
-                    totalVotes += data.votes || 0;
+                // Track and process page views (Unauth-friendly)
+                projects.forEach(p => {
+                    if(!viewedProjects.has(p.id)) {
+                        viewedProjects.add(p.id);
+                        db.collection('projects').doc(p.id).update({
+                            views: firebase.firestore.FieldValue.increment(1)
+                        });
+                        p.views = (p.views || 0) + 1; // Sync local display immediately
+                    }
                 });
 
-                // Update stats
+                // Tally Stats for top board
+                const totalVotes = projects.reduce((acc, p) => acc + (p.votes || 0), 0);
+                const uniqueEngagers = new Set(projects.map(p => p.submittedBy));
+
                 document.getElementById('total-projects').textContent = projects.length;
                 document.getElementById('total-votes').textContent = totalVotes;
-                
-                // Get unique users count
-                const usersSnapshot = await db.collection('projects').get();
-                const uniqueUsers = new Set();
-                usersSnapshot.forEach(doc => {
-                    uniqueUsers.add(doc.data().submittedBy);
-                });
-                document.getElementById('active-users').textContent = uniqueUsers.size;
-
-                // Sort alphabetically if selected
-                if (sortValue === 'alphabetical') {
-                    projects.sort((a, b) => a.title.localeCompare(b.title));
-                }
+                document.getElementById('active-users').textContent = uniqueEngagers.size;
 
                 renderProjects();
-                
             } catch (error) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-icon">⚠️</div>
-                        <h3 class="empty-title">Error Loading Projects</h3>
-                        <p>Please check your internet connection and try again.</p>
-                    </div>
-                `;
+                console.error(error);
+                document.getElementById('projects-container').innerHTML = `<p style="color:red;">Error loading content. Check Firestore Indexes.</p>`;
             }
         }
 
         function renderProjects() {
             const container = document.getElementById('projects-container');
-            
             if (projects.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state" style="grid-column: 1 / -1;">
-                        <div class="empty-icon">💡</div>
-                        <h3 class="empty-title">No Projects Yet</h3>
-                        <p>Be the first to submit a community project idea!</p>
-                        <button class="nav-btn primary" onclick="openSubmitModal()" style="margin-top: 1rem;">
-                            Submit First Project
-                        </button>
-                    </div>
-                `;
+                container.innerHTML = `<p style="text-align:center; padding: 2rem; color:var(--gray);">No ideas posted yet. Be the first!</p>`;
                 return;
             }
 
-            container.innerHTML = projects.map(project => {
-                const hasVoted = userVotes.has(project.id);
-                const videoId = extractYouTubeId(project.videoUrl);
-                
+            container.innerHTML = projects.map(p => {
+                const isOwner = currentUser && p.submittedBy === currentUser.uid;
+                const hasVoted = userVotes.has(p.id);
+                const vId = extractYouTubeId(p.videoUrl);
+
                 return `
                     <article class="project-card">
-                        <div class="project-image" style="${project.imageUrl ? `background-image: url('${project.imageUrl}'); background-size: cover;` : ''}">
-                            ${!project.imageUrl ? getCategoryEmoji(project.category) : ''}
+                        <div class="project-image" style="${p.imageUrl ? `background-image: url('${p.imageUrl}'); background-size: cover;` : ''}">
+                            ${isOwner ? `<div class="edit-badge" onclick="openEditModal('${p.id}')">✏️ Edit Idea</div>` : ''}
+                            ${!p.imageUrl ? '💡' : ''}
                         </div>
                         <div class="project-content">
-                            <h3 class="project-title">${escapeHtml(project.title)}</h3>
-                            <div class="project-author">
-                                <span>👤</span>
-                                <span>${escapeHtml(project.author)}</span>
-                                <span style="margin-left: auto; font-size: 0.8rem; background: var(--light); padding: 0.25rem 0.5rem; border-radius: 4px;">
-                                    ${project.category || 'Community'}
-                                </span>
-                            </div>
-                            <p class="project-description">${escapeHtml(project.description)}</p>
-                            
-                            ${videoId ? `
-                                <div class="video-container">
-                                    <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
-                                </div>
-                            ` : ''}
-                            
+                            <h3 class="project-title">${escapeHtml(p.title)}</h3>
+                            <div class="project-author"><span>👤</span> <span>${escapeHtml(p.author)}</span></div>
+                            <p class="project-description">${escapeHtml(p.description)}</p>
+
+                            ${vId ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${vId}" frameborder="0" allowfullscreen></iframe></div>` : ''}
+
+                            <div class="views-badge">👁️ ${(p.views || 0)} views</div>
+
                             <div class="project-meta">
-                                <button class="vote-btn ${hasVoted ? 'voted' : ''}" 
-                                        onclick="vote('${project.id}')" 
-                                        ${hasVoted ? 'disabled' : ''}>
+                                <button class="vote-btn ${hasVoted ? 'voted' : ''}" onclick="vote('${p.id}')" ${hasVoted ? 'disabled' : ''}>
                                     <span>${hasVoted ? '✓' : '▲'}</span>
                                     <span>${hasVoted ? 'Voted' : 'Vote'}</span>
                                 </button>
-                                <div class="vote-count">
-                                    ${project.votes || 0} votes
-                                </div>
+                                <div class="vote-count">${p.votes || 0} votes</div>
                             </div>
                         </div>
                     </article>
@@ -1034,24 +1107,15 @@ function signInWithGoogle() {
                 return;
             }
 
-            if (userVotes.has(projectId)) {
-                showToast('You have already voted for this project', 'error');
-                return;
-            }
-
             try {
                 const projectRef = db.collection('projects').doc(projectId);
                 
                 await db.runTransaction(async (transaction) => {
                     const doc = await transaction.get(projectRef);
-                    if (!doc.exists) {
-                        throw new Error('Project not found');
-                    }
+                    if (!doc.exists) throw new Error('Project not found');
                     
-                    const currentVotes = doc.data().voters || [];
-                    if (currentVotes.includes(currentUser.uid)) {
-                        throw new Error('Already voted');
-                    }
+                    const voters = doc.data().voters || [];
+                    if (voters.includes(currentUser.uid)) throw new Error('Already voted');
                     
                     transaction.update(projectRef, {
                         votes: firebase.firestore.FieldValue.increment(1),
@@ -1060,65 +1124,33 @@ function signInWithGoogle() {
                 });
 
                 userVotes.add(projectId);
-                
-                // Update local data
-                const project = projects.find(p => p.id === projectId);
-                if (project) {
-                    project.votes = (project.votes || 0) + 1;
-                }
-                
+                const pLocal = projects.find(p => p.id === projectId);
+                if(pLocal) pLocal.votes += 1;
+
                 renderProjects();
-                showToast('Vote recorded successfully!', 'success');
-                
-                // Update total votes display
-                const currentTotal = parseInt(document.getElementById('total-votes').textContent);
-                document.getElementById('total-votes').textContent = currentTotal + 1;
-                
+                showToast('Vote counted!', 'success');
             } catch (error) {
-                showToast(error.message || 'Voting failed. Please try again.', 'error');
+                showToast(error.message, 'error');
             }
         }
 
         async function loadUserVotes() {
             if (!currentUser) return;
-            
-            try {
-                const snapshot = await db.collection('projects')
-                    .where('voters', 'array-contains', currentUser.uid)
-                    .get();
-                
-                userVotes.clear();
-                snapshot.forEach(doc => {
-                    userVotes.add(doc.id);
-                });
-                
-                renderProjects();
-            } catch (error) {
-                console.error('Error loading user votes:', error);
-            }
+            const snapshot = await db.collection('projects').where('voters', 'array-contains', currentUser.uid).get();
+            userVotes.clear();
+            snapshot.forEach(doc => userVotes.add(doc.id));
+            renderProjects();
         }
 
+
         // ==========================================
-        // UTILITY FUNCTIONS
+        // 5. UTILITIES (Sanitizers & Triggers)
         // ==========================================
         
         function extractYouTubeId(url) {
             if (!url) return null;
-            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-            const match = url.match(regExp);
+            const match = url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/);
             return (match && match[2].length === 11) ? match[2] : null;
-        }
-
-        function getCategoryEmoji(category) {
-            const emojis = {
-                community: '🤝',
-                youth: '🌱',
-                environment: '🌍',
-                health: '❤️',
-                education: '📚',
-                other: '💡'
-            };
-            return emojis[category] || '💡';
         }
 
         function escapeHtml(text) {
@@ -1132,35 +1164,27 @@ function signInWithGoogle() {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
-            toast.innerHTML = `
-                <span>${type === 'success' ? '✓' : '⚠'}</span>
-                <span>${message}</span>
-            `;
+            toast.innerHTML = `<span>${type === 'success' ? '✓' : '⚠'}</span><span>${message}</span>`;
             container.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.style.animation = 'slideIn 0.3s ease reverse';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
+            setTimeout(() => { toast.remove(); }, 3500);
         }
 
-        // Close modals on outside click
+        // Click outside of models to close
         document.querySelectorAll('.modal-overlay').forEach(modal => {
             modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('active');
-                }
+                if (e.target === modal) closeModal(modal.id);
             });
         });
 
-        // Initialize
+        // Initialize and trigger opening marketing popup
         document.addEventListener('DOMContentLoaded', () => {
             loadProjects();
             
-            // Refresh projects every 30 seconds
-            setInterval(loadProjects, 30000);
+            // Trigger auto-popup for the landing marketing video
+            setTimeout(() => {
+                document.getElementById('welcome-modal').classList.add('active');
+            }, 1000);
         });
-
     </script>
 </body>
 </html>
