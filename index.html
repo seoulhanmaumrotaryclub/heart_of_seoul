@@ -798,17 +798,24 @@
             document.getElementById(modalId).classList.remove('active');
         }
 
-        function signInWithGoogle() {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider)
-                .then(() => {
-                    closeModal('auth-modal');
-                    showToast('Successfully logged in!', 'success');
-                })
-                .catch(error => {
-                    showToast('Login failed: ' + error.message, 'error');
-                });
-        }
+function signInWithGoogle() {
+    // Prevent multiple clicks
+    if (window.signingIn) return;
+    window.signingIn = true;
+    
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider)
+        .then(() => {
+            closeModal('auth-modal');
+            showToast('Successfully logged in!', 'success');
+        })
+        .catch(error => {
+            showToast('Login failed: ' + error.message, 'error');
+        })
+        .finally(() => {
+            window.signingIn = false;  // Reset flag
+        });
+}
 
         function signInAnonymously() {
             auth.signInAnonymously()
