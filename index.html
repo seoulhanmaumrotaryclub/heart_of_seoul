@@ -41,7 +41,7 @@
             min-height: 100vh;
         }
 
-        /* Top Utility Bar (Language & Auth) */
+        /* Top Utility Bar */
         .top-bar {
             background: #0b1c47;
             padding: 0.5rem 2rem;
@@ -77,12 +77,6 @@
             gap: 1rem;
         }
 
-        .auth-status span {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
         .logout-btn {
             background: transparent;
             border: none;
@@ -91,7 +85,7 @@
             text-decoration: underline;
         }
 
-        /* Branding Header */
+        /* Dual Logo Header */
         .header {
             background: white;
             padding: 1rem 2rem;
@@ -112,32 +106,28 @@
             gap: 1.5rem;
         }
 
-        .logo-item {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .logo-main {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            line-height: 1.1;
-        }
-
-        .logo-sub {
-            font-size: 0.75rem;
-            color: var(--gray);
-            letter-spacing: 0.5px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .logo-img {
-            height: 45px;
+        .logo-img-campaign {
+            height: 60px;
             width: auto;
             object-fit: contain;
+        }
+
+        .logo-divider {
+            height: 40px;
+            width: 2px;
+            background-color: #e2e8f0;
+        }
+
+        .logo-img-rotary {
+            height: 60px;
+            width: auto;
+            object-fit: contain;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .logo-img-rotary:hover {
+            transform: scale(1.05);
         }
 
         .nav-actions {
@@ -218,7 +208,7 @@
             100% { transform: scale(1); }
         }
 
-        /* Main Container */
+        /* Main Workspace Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -260,7 +250,7 @@
             font-weight: 500;
         }
 
-        /* Project Grid */
+        /* Project Showcase Cards Grid */
         .filter-bar {
             display: flex;
             justify-content: space-between;
@@ -282,7 +272,6 @@
             border-radius: 12px;
             background: white;
             cursor: pointer;
-            font-family: inherit;
             font-weight: 500;
         }
 
@@ -302,6 +291,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            cursor: pointer;
         }
 
         .project-card:hover {
@@ -325,23 +315,17 @@
             position: absolute;
             top: 1rem;
             right: 1rem;
-            background: rgba(255, 255, 255, 0.9);
+            background: white;
             color: var(--primary);
             padding: 0.4rem 0.8rem;
             border-radius: 50px;
             font-size: 0.75rem;
             font-weight: 700;
-            cursor: pointer;
             border: 1px solid var(--primary);
             display: flex;
             align-items: center;
             gap: 0.3rem;
-            transition: all 0.2s;
-        }
-
-        .edit-badge:hover {
-            background: var(--primary);
-            color: white;
+            z-index: 10;
         }
 
         .project-content {
@@ -378,15 +362,6 @@
             overflow: hidden;
         }
 
-        .views-badge {
-            font-size: 0.8rem;
-            color: var(--gray);
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            margin-bottom: 1rem;
-        }
-
         .project-meta {
             display: flex;
             justify-content: space-between;
@@ -413,25 +388,17 @@
 
         .vote-btn:hover:not(:disabled) {
             transform: scale(1.05);
-            box-shadow: 0 10px 20px -5px rgba(245, 158, 11, 0.4);
         }
 
         .vote-btn:disabled {
             background: #cbd5e1;
             cursor: not-allowed;
-            opacity: 0.8;
             color: var(--gray);
         }
 
         .vote-btn.voted {
             background: var(--success);
             color: white;
-        }
-
-        .vote-count {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--dark);
         }
 
         /* Modal Overlays */
@@ -455,16 +422,11 @@
             animation: fadeIn 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
         .modal {
             background: white;
             border-radius: 24px;
             width: 100%;
-            max-width: 600px;
+            max-width: 700px;
             max-height: 90vh;
             overflow-y: auto;
             padding: 2.5rem;
@@ -472,10 +434,8 @@
             animation: slideUp 0.3s ease;
         }
 
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
         .modal-close {
             position: absolute;
@@ -492,12 +452,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .modal-close:hover {
-            background: var(--light);
-            color: var(--dark);
         }
 
         .modal-title {
@@ -527,23 +481,11 @@
             border-radius: 12px;
             font-family: inherit;
             font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-input:focus, .form-textarea:focus {
-            outline: none;
-            border-color: var(--primary-light);
         }
 
         .form-textarea {
             min-height: 140px;
             resize: vertical;
-        }
-
-        .form-hint {
-            font-size: 0.8rem;
-            color: var(--gray);
-            margin-top: 0.25rem;
         }
 
         .submit-btn {
@@ -569,21 +511,15 @@
             cursor: not-allowed;
         }
 
-        /* Marketing & Intro Popup specific */
-        .welcome-modal {
-            max-width: 700px;
-            text-align: center;
-        }
-
+        /* Video Container Context */
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%; /* 16:9 aspect */
             height: 0;
             overflow: hidden;
             border-radius: 16px;
             margin: 1.5rem 0;
             background: #000;
-            box-shadow: var(--shadow-lg);
         }
 
         .video-container iframe {
@@ -594,7 +530,28 @@
             height: 100%;
         }
 
-        /* Toasts */
+        /* Share Button */
+        .share-btn {
+            background: white;
+            color: var(--gray);
+            border: 2px solid #e2e8f0;
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .share-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Toast Notifications */
         .toast-container {
             position: fixed;
             bottom: 2rem;
@@ -618,10 +575,7 @@
             font-weight: 500;
         }
 
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
         .toast.success { border-left: 4px solid var(--success); }
         .toast.error { border-left: 4px solid #ef4444; }
@@ -641,41 +595,37 @@
             <span id="lang-icon">🇰🇷</span> <span id="lang-label">한국어</span>
         </button>
         <div class="auth-status">
-            <span id="user-display">
-                <span>👤</span> <span data-i18n="guest">Guest View</span>
-            </span>
+            <span id="user-display">👤 Guest View</span>
             <button id="quick-logout" class="logout-btn" style="display:none;" onclick="logout()">Logout</button>
         </div>
     </div>
 
     <header class="header">
         <div class="logos-container">
-            <div class="logo-item">
-                <span class="logo-main">Heart of Seoul</span>
-                <span class="logo-sub" data-i18n="campaignSub">Community Campaign</span>
-            </div>
+            <img src="Heart of Seoul PNG.png" alt="Heart of Seoul Listening Campaign" class="logo-img-campaign">
             
-            <div class="logo-item" style="border-left: 1px solid #e2e8f0; padding-left: 1.5rem;">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8f/Rotary_International_logo.svg/1200px-Rotary_International_logo.svg.png" alt="Seoul Hanmaum Rotary Logo" class="logo-img">
-                <span style="font-size: 0.65rem; color: var(--gray); font-weight: 600;">Seoul Hanmaum</span>
-            </div>
+            <div class="logo-divider"></div>
+
+            <a href="http://seoulhanmaumrotaryclub.org/" target="_blank">
+                <img src="Seoul Rotary Hanmaum Logo (1).png" alt="Seoul Hanmaum Rotary Club" class="logo-img-rotary">
+            </a>
         </div>
 
         <div class="nav-actions">
             <button class="nav-btn secondary" onclick="showAuthModal()" id="nav-login-btn">
-                <span>🔑</span> <span data-i18n="login">Login with Google</span>
+                <span>🔑</span> Login
             </button>
             <button class="nav-btn primary" onclick="openSubmitModal()">
-                <span>➕</span> <span data-i18n="submitBtn">Submit Project</span>
+                <span>➕</span> Submit Idea
             </button>
         </div>
     </header>
 
     <section class="hero">
-        <span class="campaign-banner" data-i18n="campaignActive">Campaign Active: Mar - May 2026</span>
-        <h1 class="hero-title" data-i18n="heroTitle">What does Seoul need?</h1>
-        <p class="hero-desc" data-i18n="heroDesc">
-            Seoul Hanmaum Rotary Club is launching the "Heart of Seoul" listening campaign. For the next 2-3 months, we are open-sourcing our focus. We want you to pitch your ideas on community service projects you are passionate about. Share your stories, share your video pitches, and vote on what projects matter most to our city. Let’s build something together!
+        <span class="campaign-banner">Campaign Active: Mar - May 2026</span>
+        <h1 class="hero-title">What does Seoul need?</h1>
+        <p class="hero-desc">
+            Seoul Hanmaum Rotary Club is launching the "Heart of Seoul" listening campaign. For the next 2-3 months, we are open-sourcing our focus. Pitch your ideas, share your stories, view details, and vote on what matters to you.
         </p>
     </section>
 
@@ -684,99 +634,124 @@
         <div class="stats-bar">
             <div class="stat-card">
                 <div class="stat-number" id="total-projects">0</div>
-                <div class="stat-label" data-i18n="statProjects">Community Pitches</div>
+                <div class="stat-label">Community Pitches</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="total-votes">0</div>
-                <div class="stat-label" data-i18n="statVotes">Total Votes Recorded</div>
+                <div class="stat-label">Total Votes Counted</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="active-users">0</div>
-                <div class="stat-label" data-i18n="statMembers">Engaged Members</div>
+                <div class="stat-label">Involved Members</div>
             </div>
         </div>
 
         <div class="filter-bar">
-            <h2 class="section-title" data-i18n="showcaseTitle">📋 Community Showcase</h2>
+            <h2 class="section-title">📋 Community Showcase</h2>
             <select class="sort-select" id="sort-select" onchange="loadProjects()">
-                <option value="popular" data-i18n="sortPopular">Most Voted</option>
-                <option value="newest" data-i18n="sortNew">Newest Ideas</option>
+                <option value="popular">Most Voted Ideas</option>
+                <option value="newest">Newest Ideas</option>
             </select>
         </div>
 
         <div id="projects-container" class="projects-grid">
-            <div class="loading">
-                <p>Curating projects...</p>
+            </div>
+    </main>
+
+    <div id="view-modal" class="modal-overlay">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('view-modal')">&times;</button>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h2 class="modal-title" id="view-title">Project Title</h2>
+                <div style="display:flex; gap: 0.5rem;" id="owner-actions-container">
+                    </div>
+            </div>
+
+            <div class="project-author" id="view-author">By John Doe</div>
+            
+            <div id="view-image-placeholder" style="width:100%; height: 300px; border-radius: 16px; background-size: cover; background-position: center; margin-bottom: 1.5rem; display:none;"></div>
+
+            <div id="view-description" style="line-height: 1.8; color: var(--dark); font-size: 1.05rem; white-space: pre-wrap; margin-bottom: 2rem;"></div>
+
+            <div id="view-video-container" class="video-container" style="display:none;"></div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top: 2px solid #e2e8f0; padding-top: 1.5rem;">
+                <button class="share-btn" id="view-share-btn">🔗 Share This Idea</button>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <span id="view-views" style="font-size: 0.9rem; color: var(--gray);">👁️ 0 views</span>
+                    <span id="view-votes" style="font-weight: 700; font-size: 1.2rem;">0 votes</span>
+                </div>
             </div>
         </div>
-    </main>
+    </div>
 
     <div id="submit-modal" class="modal-overlay">
         <div class="modal">
             <button class="modal-close" onclick="closeModal('submit-modal')">&times;</button>
-            <h2 class="modal-title" id="form-modal-title" data-i18n="formTitle">Pitch Your Idea</h2>
+            <h2 class="modal-title" id="form-modal-title">Pitch Your Idea</h2>
             
             <form id="project-form" onsubmit="handleProjectSubmit(event)">
                 <input type="hidden" id="edit-project-id" value="">
 
                 <div class="form-group">
-                    <label class="form-label" data-i18n="fTitle">Project Title *</label>
-                    <input type="text" class="form-input" id="project-title" required placeholder="Ex: Children's Art Workshop">
+                    <label class="form-label">Project Title *</label>
+                    <input type="text" class="form-input" id="project-title" required placeholder="Ex: Afterschool English Tutoring">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" data-i18n="fAuthor">Your Name / Team Name *</label>
+                    <label class="form-label">Your Name / Group Name *</label>
                     <input type="text" class="form-input" id="project-author" required placeholder="John Doe">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" data-i18n="fDesc">Describe your story & pitch *</label>
-                    <textarea class="form-textarea" id="project-description" required placeholder="Tell us the problem and how this project solves it."></textarea>
+                    <label class="form-label">Deep Dive & Story Pitch (Markdown links allowed) *</label>
+                    <textarea class="form-textarea" id="project-description" required placeholder="Tell your story. Outline your research links, problem parameters, and expectations. Add dated updates here over time."></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" data-i18n="fVid">YouTube Video URL (Pitch Link)</label>
+                    <label class="form-label">YouTube Video Pitch Link</label>
                     <input type="url" class="form-input" id="project-video" placeholder="https://www.youtube.com/watch?v=...">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" data-i18n="fImage">Thumbnail Image URL (Optional)</label>
-                    <input type="url" class="form-input" id="project-image" placeholder="https://unsplash.com/your-image.jpg">
+                    <label class="form-label">Hero Thumbnail Image URL (Optional)</label>
+                    <input type="url" class="form-input" id="project-image" placeholder="https://unsplash.com/...">
                 </div>
 
-                <button type="submit" class="submit-btn" id="submit-project-btn" data-i18n="fSubmit">
-                    Publish My Project
-                </button>
+                <button type="submit" class="submit-btn" id="submit-project-btn">Publish Content</button>
             </form>
         </div>
     </div>
 
-    <div id="welcome-modal" class="modal-overlay">
-        <div class="modal welcome-modal">
-            <button class="modal-close" onclick="closeModal('welcome-modal')">&times;</button>
-            <h2 class="modal-title" data-i18n="popTitle">Welcome to the Campaign!</h2>
-            <p style="color: var(--gray);" data-i18n="popDesc">Watch this short video to understand what the "Heart of Seoul" is all about and how you can participate!</p>
-            
-            <div class="video-container">
-                <iframe id="intro-video-iframe" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-            </div>
-
-            <button class="submit-btn" onclick="closeModal('welcome-modal')" data-i18n="popClose">
-                Get Started & Browse
-            </button>
-        </div>
-    </div>
-
     <div id="auth-modal" class="modal-overlay">
-        <div class="modal" style="max-width: 450px; text-align: center;">
+        <div class="modal" style="max-width: 450px;">
             <button class="modal-close" onclick="closeModal('auth-modal')">&times;</button>
-            <h2 class="modal-title" data-i18n="loginTitle">Secure Google Login</h2>
-            <p style="color: var(--gray); margin-bottom: 2rem;" data-i18n="loginDesc">
-                To prevent fraud and ensure a fair "1 vote per person" system, you must log in with Google to vote or submit projects.
+            <h2 class="modal-title">Login or Create Account</h2>
+            <p style="color: var(--gray); margin-bottom: 1.5rem; text-align: center;">
+                Fair voting. One person, one vote. Use Google or your Email.
             </p>
 
-            <button class="submit-btn" onclick="signInWithGoogle()" style="display:flex; align-items:center; justify-content:center; gap: 0.5rem;">
-                🔴 <span data-i18n="loginBtn">Continue with Google</span>
+            <form id="email-auth-form" onsubmit="handleEmailAuth(event)" style="margin-bottom: 1.5rem;">
+                <div class="form-group">
+                    <input type="email" class="form-input" id="auth-email" required placeholder="Email Address">
+                </div>
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <input type="password" class="form-input" id="auth-password" required placeholder="Password (Min 6 chars)">
+                </div>
+                <div style="display:flex; gap: 0.5rem;">
+                    <button type="submit" class="submit-btn" id="email-login-btn">Log In</button>
+                    <button type="button" class="submit-btn" onclick="handleEmailSignUp()" style="background:var(--gray)">Sign Up</button>
+                </div>
+            </form>
+
+            <div style="text-align:center; position:relative; margin-bottom: 1.5rem; color: var(--gray);">
+                <hr style="border-color:#e2e8f0">
+                <span style="position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:white; padding:0 1rem;">OR</span>
+            </div>
+
+            <button class="submit-btn" onclick="signInWithGoogle()" style="display:flex; align-items:center; justify-content:center; gap: 0.5rem; background: #ea4335;">
+                🔴 <span>Continue with Google</span>
             </button>
         </div>
     </div>
@@ -808,91 +783,7 @@
         let viewedProjects = new Set(); 
 
         // ==========================================
-        // 2. BILINGUAL DICTIONARY HANDLER
-        // ==========================================
-        
-        let currentLang = 'en';
-        const translations = {
-            en: {
-                campaignSub: "Community Campaign",
-                campaignActive: "Campaign Active: Mar - May 2026",
-                heroTitle: "What does Seoul need?",
-                heroDesc: "Seoul Hanmaum Rotary Club is launching the 'Heart of Seoul' listening campaign. For the next 2-3 months, we are open-sourcing our focus. We want you to pitch your ideas on community service projects you are passionate about. Share your stories, share your video pitches, and vote on what projects matter most to our city.",
-                login: "Login with Google",
-                submitBtn: "Submit Project",
-                statProjects: "Community Pitches",
-                statVotes: "Total Votes Recorded",
-                statMembers: "Engaged Members",
-                showcaseTitle: "📋 Community Showcase",
-                sortPopular: "Most Voted",
-                sortNew: "Newest Ideas",
-                guest: "Guest View",
-                formTitle: "Pitch Your Idea",
-                fTitle: "Project Title *",
-                fAuthor: "Your Name / Team Name *",
-                fDesc: "Describe your story & pitch *",
-                fVid: "YouTube Video URL (Pitch Link)",
-                fImage: "Thumbnail Image URL (Optional)",
-                fSubmit: "Publish My Project",
-                popTitle: "Welcome to the Campaign!",
-                popDesc: "Watch this short video to understand what the 'Heart of Seoul' is all about and how you can participate!",
-                popClose: "Get Started & Browse",
-                loginTitle: "Secure Google Login",
-                loginDesc: "To prevent fraud and ensure a fair '1 vote per person' system, you must log in with Google to vote or submit projects.",
-                loginBtn: "Continue with Google"
-            },
-            ko: {
-                campaignSub: "커뮤니티 캠페인",
-                campaignActive: "캠페인 기간: 2026년 3월 - 5월",
-                heroTitle: "서울에 무엇이 필요할까요?",
-                heroDesc: "서울 한마음 로타리클럽에서 'Heart of Seoul' 듣기 캠페인을 시작합니다. 향후 2-3개월 동안 우리의 비전을 오픈소스로 공유합니다. 여러분이 열정을 가진 커뮤니티 봉사 프로젝트 아이디어를 제안해 주세요. 이야기와 동영상 피치를 공유하고, 우리 도시에 가장 중요한 프로젝트에 투표해 주세요.",
-                login: "Google 로그인",
-                submitBtn: "프로젝트 제출",
-                statProjects: "제안된 아이디어",
-                statVotes: "기록된 총 투표수",
-                statMembers: "참여 중인 회원",
-                showcaseTitle: "📋 커뮤니티 쇼케이스",
-                sortPopular: "인기순",
-                sortNew: "최신순",
-                guest: "게스트 보기",
-                formTitle: "아이디어 제안하기",
-                fTitle: "프로젝트 제목 *",
-                fAuthor: "작성자 / 팀명 *",
-                fDesc: "스토리 및 피치 설명 *",
-                fVid: "YouTube 동영상 URL (피치 링크)",
-                fImage: "썸네일 이미지 URL (선택사항)",
-                fSubmit: "내 프로젝트 게시하기",
-                popTitle: "캠페인에 오신 것을 환영합니다!",
-                popDesc: "'Heart of Seoul' 캠페인이 무엇인지, 어떻게 참여하는지 짧은 동영상을 통해 확인해 보세요!",
-                popClose: "시작하기 & 둘러보기",
-                loginTitle: "안전한 구글 로그인",
-                loginDesc: "부정 투표를 방지하고 '1인 1표' 공정성을 보장하기 위해 투표 및 제출은 구글 로그인이 필요합니다.",
-                loginBtn: "구글로 계속하기"
-            }
-        };
-
-        function toggleLanguage() {
-            currentLang = currentLang === 'en' ? 'ko' : 'en';
-            
-            // Toggle Top UI UI
-            document.getElementById('lang-icon').textContent = currentLang === 'en' ? '🇰🇷' : '🇺🇸';
-            document.getElementById('lang-label').textContent = currentLang === 'en' ? '한국어' : 'English';
-
-            // Swap standard DOM texts
-            document.querySelectorAll('[data-i18n]').forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                if (translations[currentLang][key]) {
-                    element.textContent = translations[currentLang][key];
-                }
-            });
-
-            // Re-render project cards to update buttons inside them
-            renderProjects();
-        }
-
-
-        // ==========================================
-        // 3. SECURE AUTH TRACKER (Zero Guest Permissions for Write Actions)
+        // 2. SECURE AUTH TRACKER
         // ==========================================
         
         function showAuthModal() {
@@ -904,13 +795,38 @@
         }
 
         function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.remove('active');
+            document.getElementById(modalId).classList.remove('active');
+        }
 
-            // If video modal closes, stop the video from playing
-            if(modalId === 'welcome-modal') {
-                document.getElementById('intro-video-iframe').src = document.getElementById('intro-video-iframe').src;
+        // --- Firebase Email/Password Auth Handlers ---
+        function handleEmailAuth(e) {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value;
+            const pass = document.getElementById('auth-password').value;
+
+            auth.signInWithEmailAndPassword(email, pass)
+                .then(() => {
+                    closeModal('auth-modal');
+                    showToast('Successfully logged in!', 'success');
+                })
+                .catch(error => showToast('Login failed: ' + error.message, 'error'));
+        }
+
+        function handleEmailSignUp() {
+            const email = document.getElementById('auth-email').value;
+            const pass = document.getElementById('auth-password').value;
+
+            if(!email || pass.length < 6) {
+                showToast('Email and 6-char password required to signup', 'error');
+                return;
             }
+
+            auth.createUserWithEmailAndPassword(email, pass)
+                .then(() => {
+                    closeModal('auth-modal');
+                    showToast('Account Created Successfully!', 'success');
+                })
+                .catch(error => showToast('Sign up failed: ' + error.message, 'error'));
         }
 
         function signInWithGoogle() {
@@ -937,14 +853,14 @@
             const navLoginBtn = document.getElementById('nav-login-btn');
 
             if (user) {
-                userDisplay.innerHTML = `<span>👤</span> ${user.displayName || 'User'}`;
+                userDisplay.innerHTML = `<span>👤</span> ${user.displayName || user.email || 'Member'}`;
                 quickLogout.style.display = 'inline';
                 navLoginBtn.innerHTML = `<span>🔓</span> Logout`;
                 loadUserVotes();
             } else {
                 userDisplay.innerHTML = `<span>👤</span> Guest View`;
                 quickLogout.style.display = 'none';
-                navLoginBtn.innerHTML = `<span>🔑</span> Login with Google`;
+                navLoginBtn.innerHTML = `<span>🔑</span> Login`;
                 userVotes.clear();
             }
             renderProjects();
@@ -952,7 +868,85 @@
 
 
         // ==========================================
-        // 4. FUNCTIONAL ENGINES (Vote, Edit, View Tracking)
+        // 3. PROJECT EXPANSIONS & VIRAL DEEP-LINKS
+        // ==========================================
+        
+        // This is the core engine that loads full details and lets you share it
+        async function openViewModal(projectId) {
+            const project = projects.find(p => p.id === projectId);
+            if (!project) return;
+
+            // Track page view
+            if(!viewedProjects.has(projectId)) {
+                viewedProjects.add(projectId);
+                db.collection('projects').doc(projectId).update({
+                    views: firebase.firestore.FieldValue.increment(1)
+                });
+                project.views = (project.views || 0) + 1; // update locally instantly
+            }
+
+            // Bind DOM
+            document.getElementById('view-title').innerText = project.title;
+            document.getElementById('view-author').innerText = `By ${project.author}`;
+            document.getElementById('view-description').innerText = project.description;
+            document.getElementById('view-views').innerText = `👁️ ${project.views || 0} views`;
+            document.getElementById('view-votes').innerText = `${project.votes || 0} votes`;
+
+            // Display hero image if it exists
+            const imgBox = document.getElementById('view-image-placeholder');
+            if (project.imageUrl) {
+                imgBox.style.backgroundImage = `url('${project.imageUrl}')`;
+                imgBox.style.display = 'block';
+            } else {
+                imgBox.style.display = 'none';
+            }
+
+            // Display Youtube Video if it exists
+            const videoBox = document.getElementById('view-video-container');
+            const vId = extractYouTubeId(project.videoUrl);
+            if (vId) {
+                videoBox.innerHTML = `<iframe src="https://www.youtube.com/embed/${vId}" frameborder="0" allowfullscreen></iframe>`;
+                videoBox.style.display = 'block';
+            } else {
+                videoBox.style.display = 'none';
+            }
+
+            // Determine if viewer is Owner. If so, build edit options inside view modal
+            const actionsBox = document.getElementById('owner-actions-container');
+            actionsBox.innerHTML = '';
+            if (currentUser && project.submittedBy === currentUser.uid) {
+                actionsBox.innerHTML = `<button class="share-btn" onclick="closeModal('view-modal'); openEditModal('${project.id}');" style="border-color: var(--primary); color:var(--primary);">✏️ Edit/Update</button>`;
+            }
+
+            // Viral Sharing Mechanism
+            document.getElementById('view-share-btn').onclick = () => {
+                const shareUrl = `${window.location.origin}${window.location.pathname}?project=${projectId}`;
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    showToast('Link copied! Share it with friends to drive votes.', 'success');
+                });
+            };
+
+            document.getElementById('view-modal').classList.add('active');
+        }
+
+        // Looks at standard URL browsers and pops a modal open if shared URL is accessed
+        function checkURLParameters() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectId = urlParams.get('project');
+            if (projectId) {
+                // Wait for DB loading to finish
+                const checkExist = setInterval(() => {
+                    if (projects.length > 0) {
+                        clearInterval(checkExist);
+                        openViewModal(projectId);
+                    }
+                }, 100);
+            }
+        }
+
+
+        // ==========================================
+        // 4. FUNCTIONAL ENGINES (Vote, Create, Edit)
         // ==========================================
         
         function openSubmitModal() {
@@ -960,10 +954,9 @@
                 showAuthModal();
                 return;
             }
-            // Reset to clean creation state
             document.getElementById('edit-project-id').value = "";
             document.getElementById('project-form').reset();
-            document.getElementById('form-modal-title').textContent = currentLang === 'en' ? "Pitch Your Idea" : "아이디어 제안하기";
+            document.getElementById('form-modal-title').innerText = "Pitch Your Idea";
             document.getElementById('submit-modal').classList.add('active');
         }
 
@@ -978,7 +971,7 @@
             document.getElementById('project-video').value = project.videoUrl || "";
             document.getElementById('project-image').value = project.imageUrl || "";
 
-            document.getElementById('form-modal-title').textContent = currentLang === 'en' ? "Edit Your Pitch" : "프로젝트 수정하기";
+            document.getElementById('form-modal-title').innerText = "Edit/Update Your Pitch";
             document.getElementById('submit-modal').classList.add('active');
         }
 
@@ -1001,14 +994,12 @@
                 };
 
                 if (editId) {
-                    // Updating an existing project
                     await db.collection('projects').doc(editId).update(projectData);
                     showToast('Project updated successfully!', 'success');
                 } else {
-                    // Creating fresh new project
                     projectData.submittedAt = firebase.firestore.FieldValue.serverTimestamp();
                     projectData.votes = 0;
-                    projectData.views = 0; // Initialize views
+                    projectData.views = 0; 
                     projectData.voters = [];
                     await db.collection('projects').add(projectData);
                     showToast('Project Published successfully!', 'success');
@@ -1035,24 +1026,12 @@
                 const snapshot = await query.get();
                 projects = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-                // Track and process page views (Unauth-friendly)
-                projects.forEach(p => {
-                    if(!viewedProjects.has(p.id)) {
-                        viewedProjects.add(p.id);
-                        db.collection('projects').doc(p.id).update({
-                            views: firebase.firestore.FieldValue.increment(1)
-                        });
-                        p.views = (p.views || 0) + 1; // Sync local display immediately
-                    }
-                });
-
-                // Tally Stats for top board
                 const totalVotes = projects.reduce((acc, p) => acc + (p.votes || 0), 0);
                 const uniqueEngagers = new Set(projects.map(p => p.submittedBy));
 
-                document.getElementById('total-projects').textContent = projects.length;
-                document.getElementById('total-votes').textContent = totalVotes;
-                document.getElementById('active-users').textContent = uniqueEngagers.size;
+                document.getElementById('total-projects').innerText = projects.length;
+                document.getElementById('total-votes').innerText = totalVotes;
+                document.getElementById('active-users').innerText = uniqueEngagers.size;
 
                 renderProjects();
             } catch (error) {
@@ -1071,12 +1050,11 @@
             container.innerHTML = projects.map(p => {
                 const isOwner = currentUser && p.submittedBy === currentUser.uid;
                 const hasVoted = userVotes.has(p.id);
-                const vId = extractYouTubeId(p.videoUrl);
 
                 return `
-                    <article class="project-card">
+                    <article class="project-card" onclick="openViewModal('${p.id}')">
                         <div class="project-image" style="${p.imageUrl ? `background-image: url('${p.imageUrl}'); background-size: cover;` : ''}">
-                            ${isOwner ? `<div class="edit-badge" onclick="openEditModal('${p.id}')">✏️ Edit Idea</div>` : ''}
+                            ${isOwner ? `<div class="edit-badge">✏️ Owner</div>` : ''}
                             ${!p.imageUrl ? '💡' : ''}
                         </div>
                         <div class="project-content">
@@ -1084,12 +1062,8 @@
                             <div class="project-author"><span>👤</span> <span>${escapeHtml(p.author)}</span></div>
                             <p class="project-description">${escapeHtml(p.description)}</p>
 
-                            ${vId ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${vId}" frameborder="0" allowfullscreen></iframe></div>` : ''}
-
-                            <div class="views-badge">👁️ ${(p.views || 0)} views</div>
-
                             <div class="project-meta">
-                                <button class="vote-btn ${hasVoted ? 'voted' : ''}" onclick="vote('${p.id}')" ${hasVoted ? 'disabled' : ''}>
+                                <button class="vote-btn ${hasVoted ? 'voted' : ''}" onclick="event.stopPropagation(); vote('${p.id}')" ${hasVoted ? 'disabled' : ''}>
                                     <span>${hasVoted ? '✓' : '▲'}</span>
                                     <span>${hasVoted ? 'Voted' : 'Vote'}</span>
                                 </button>
@@ -1144,9 +1118,17 @@
 
 
         // ==========================================
-        // 5. UTILITIES (Sanitizers & Triggers)
+        // 5. UTILITIES (Sanitizers & Bilinguality Template)
         // ==========================================
         
+        let currentLang = 'en';
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ko' : 'en';
+            document.getElementById('lang-icon').innerText = currentLang === 'en' ? '🇰🇷' : '🇺🇸';
+            document.getElementById('lang-label').innerText = currentLang === 'en' ? '한국어' : 'English';
+            // Expanding standard dictionary translations happens here
+        }
+
         function extractYouTubeId(url) {
             if (!url) return null;
             const match = url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/);
@@ -1169,21 +1151,15 @@
             setTimeout(() => { toast.remove(); }, 3500);
         }
 
-        // Click outside of models to close
         document.querySelectorAll('.modal-overlay').forEach(modal => {
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) closeModal(modal.id);
             });
         });
 
-        // Initialize and trigger opening marketing popup
         document.addEventListener('DOMContentLoaded', () => {
             loadProjects();
-            
-            // Trigger auto-popup for the landing marketing video
-            setTimeout(() => {
-                document.getElementById('welcome-modal').classList.add('active');
-            }, 1000);
+            checkURLParameters();
         });
     </script>
 </body>
